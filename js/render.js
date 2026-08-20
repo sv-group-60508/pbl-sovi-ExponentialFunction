@@ -41,7 +41,7 @@ export function burst(x, y, color, n = 20) {
 
 export function confetti() {
   const r = stage.getBoundingClientRect();
-  const colors = ['#58cc02', '#1cb0f6', '#ffc800', '#ff4b4b', '#ce82ff', '#ff6b9d'];
+  const colors = ['#8D61EF', '#31D6E7', '#FFE783', '#FFB283', '#7451D6', '#1FB4C6'];
   for (let i = 0; i < 90; i++) {
     state.particles.push({
       x: Math.random() * r.width,
@@ -92,7 +92,7 @@ function drawStars(W, H) {
   state.stars.forEach((s) => {
     s.a += s.v;
     if (s.a > 0.85 || s.a < 0.15) s.v = -s.v;
-    ctx.fillStyle = `rgba(255,255,255,${Math.max(0.08, s.a)})`;
+    ctx.fillStyle = `rgba(141,97,239,${Math.max(0.05, s.a * 0.4)})`;
     ctx.beginPath();
     ctx.arc(s.x * W, s.y * H, s.s, 0, Math.PI * 2);
     ctx.fill();
@@ -107,11 +107,11 @@ function drawDanger(W, H) {
     const h = H - p.y;
     if (h <= 0) return;
     const g = ctx.createLinearGradient(0, p.y, 0, H);
-    g.addColorStop(0, 'rgba(255,75,75,.4)');
-    g.addColorStop(1, 'rgba(160,20,20,.8)');
+    g.addColorStop(0, 'rgba(255,107,107,.22)');
+    g.addColorStop(1, 'rgba(224,82,82,.5)');
     ctx.fillStyle = g;
     ctx.fillRect(0, p.y, W, h);
-    ctx.strokeStyle = '#ff4b4b';
+    ctx.strokeStyle = '#FF6B6B';
     ctx.lineWidth = 2.5;
     ctx.setLineDash([9, 7]);
     ctx.beginPath();
@@ -119,7 +119,7 @@ function drawDanger(W, H) {
     ctx.lineTo(W, p.y);
     ctx.stroke();
     ctx.setLineDash([]);
-    ctx.fillStyle = '#ffb3b3';
+    ctx.fillStyle = '#E05252';
     ctx.font = 'bold 11px Nunito,sans-serif';
     ctx.fillText(`⚠️ Danger zone (y < ${o.yMax})`, 10, p.y + 17);
   });
@@ -127,7 +127,7 @@ function drawDanger(W, H) {
 
 function drawGrid(W, H) {
   const { minX, maxX, minY, maxY } = visibleRange(W, H);
-  ctx.strokeStyle = 'rgba(255,255,255,.07)';
+  ctx.strokeStyle = 'rgba(141,97,239,.08)';
   ctx.lineWidth = 1;
   ctx.beginPath();
   for (let x = Math.floor(minX); x <= Math.ceil(maxX); x++) {
@@ -142,7 +142,7 @@ function drawGrid(W, H) {
   }
   ctx.stroke();
   const o = m2s(0, 0);
-  ctx.strokeStyle = 'rgba(255,255,255,.28)';
+  ctx.strokeStyle = 'rgba(34,37,49,.28)';
   ctx.lineWidth = 2;
   ctx.beginPath();
   ctx.moveTo(0, o.y);
@@ -150,7 +150,7 @@ function drawGrid(W, H) {
   ctx.moveTo(o.x, 0);
   ctx.lineTo(o.x, H);
   ctx.stroke();
-  ctx.fillStyle = 'rgba(255,255,255,.45)';
+  ctx.fillStyle = 'rgba(34,37,49,.45)';
   ctx.font = '10px Courier New,monospace';
   for (let x = Math.floor(minX); x <= Math.ceil(maxX); x++) {
     if (x === 0) continue;
@@ -169,7 +169,7 @@ function drawAsymptoteIfNeeded(W) {
   const k = state.params.k;
   if (L.locked.includes('k') && k === 0) return;
   const p = m2s(0, k);
-  ctx.strokeStyle = '#58cc02';
+  ctx.strokeStyle = '#FFB283';
   ctx.lineWidth = 2;
   ctx.setLineDash([7, 7]);
   ctx.beginPath();
@@ -177,7 +177,7 @@ function drawAsymptoteIfNeeded(W) {
   ctx.lineTo(W, p.y);
   ctx.stroke();
   ctx.setLineDash([]);
-  ctx.fillStyle = '#7be42a';
+  ctx.fillStyle = '#D9732B';
   ctx.font = 'bold 11px Nunito,sans-serif';
   ctx.fillText(`Asymptote y = ${fmt(k)}`, 10, p.y - 7);
 }
@@ -188,20 +188,20 @@ function drawAsteroids() {
     const sp = m2s(o.x, o.y);
     const pr = o.r * state.view.unit;
     const g = ctx.createRadialGradient(sp.x, sp.y, pr * 0.4, sp.x, sp.y, pr * 1.7);
-    g.addColorStop(0, 'rgba(255,75,75,.4)');
+    g.addColorStop(0, 'rgba(255,107,107,.3)');
     g.addColorStop(1, 'transparent');
     ctx.fillStyle = g;
     ctx.beginPath();
     ctx.arc(sp.x, sp.y, pr * 1.7, 0, Math.PI * 2);
     ctx.fill();
-    ctx.fillStyle = '#5b6478';
-    ctx.strokeStyle = '#ff6b6b';
+    ctx.fillStyle = '#DCD8EE';
+    ctx.strokeStyle = '#FF8A8A';
     ctx.lineWidth = 2.5;
     ctx.beginPath();
     ctx.arc(sp.x, sp.y, pr, 0, Math.PI * 2);
     ctx.fill();
     ctx.stroke();
-    ctx.fillStyle = '#454d61';
+    ctx.fillStyle = '#C6BFE2';
     ctx.beginPath();
     ctx.arc(sp.x - pr * 0.3, sp.y - pr * 0.25, pr * 0.28, 0, Math.PI * 2);
     ctx.arc(sp.x + pr * 0.35, sp.y + pr * 0.3, pr * 0.2, 0, Math.PI * 2);
@@ -217,20 +217,20 @@ function drawTargets() {
     const base = 0.55 * state.view.unit;
     const pulse = Math.sin(t + i * 1.3) * 3;
     if (tg.collected) {
-      ctx.fillStyle = 'rgba(88,204,2,.2)';
-      ctx.strokeStyle = '#58cc02';
+      ctx.fillStyle = 'rgba(49,214,231,.18)';
+      ctx.strokeStyle = '#31D6E7';
       ctx.lineWidth = 3;
       ctx.beginPath();
       ctx.arc(sp.x, sp.y, base * 0.85, 0, Math.PI * 2);
       ctx.fill();
       ctx.stroke();
-      ctx.fillStyle = '#58cc02';
+      ctx.fillStyle = '#0E9AAC';
       ctx.font = '900 16px Nunito,sans-serif';
       ctx.fillText('✓', sp.x - 6, sp.y + 6);
       return;
     }
     const glow = ctx.createRadialGradient(sp.x, sp.y, 2, sp.x, sp.y, base * 1.7 + pulse);
-    glow.addColorStop(0, 'rgba(28,176,246,.55)');
+    glow.addColorStop(0, 'rgba(49,214,231,.45)');
     glow.addColorStop(1, 'transparent');
     ctx.fillStyle = glow;
     ctx.beginPath();
@@ -238,8 +238,8 @@ function drawTargets() {
     ctx.fill();
     const r = base * 0.9 + pulse * 0.4;
     const grad = ctx.createLinearGradient(sp.x, sp.y - r, sp.x, sp.y + r);
-    grad.addColorStop(0, '#8be9ff');
-    grad.addColorStop(1, '#1cb0f6');
+    grad.addColorStop(0, '#7FE7F2');
+    grad.addColorStop(1, '#31D6E7');
     ctx.fillStyle = grad;
     ctx.strokeStyle = '#fff';
     ctx.lineWidth = 2.5;
@@ -258,7 +258,7 @@ function drawTargets() {
     ctx.font = 'bold 10.5px Courier New,monospace';
     const label = `(${fmt(tg.x)}, ${fmt(tg.y)})`;
     const tw = ctx.measureText(label).width;
-    ctx.fillStyle = 'rgba(8,12,38,.7)';
+    ctx.fillStyle = 'rgba(255,255,255,.92)';
     const W = stage.getBoundingClientRect().width;
     let lx = sp.x + r + 6;
     let ly = sp.y - 14;
@@ -271,7 +271,7 @@ function drawTargets() {
     ctx.beginPath();
     ctx.roundRect(lx - 4, ly - 9, tw + 8, 15, 7);
     ctx.fill();
-    ctx.fillStyle = '#bfe9ff';
+    ctx.fillStyle = '#0E9AAC';
     ctx.fillText(label, lx, ly + 2);
   });
 }
@@ -279,12 +279,12 @@ function drawTargets() {
 function drawCurve(W, H) {
   const { minX, maxX } = visibleRange(W, H);
   ctx.save();
-  ctx.strokeStyle = '#1cb0f6';
+  ctx.strokeStyle = '#8D61EF';
   ctx.lineWidth = 4.5;
   ctx.lineCap = 'round';
   ctx.lineJoin = 'round';
-  ctx.shadowColor = '#1cb0f6';
-  ctx.shadowBlur = 16;
+  ctx.shadowColor = 'rgba(141,97,239,.4)';
+  ctx.shadowBlur = 14;
   ctx.beginPath();
   let started = false;
   const step = Math.max(0.01, (maxX - minX) / (W * 0.9));
@@ -311,7 +311,7 @@ function drawCurve(W, H) {
 function drawAnchor() {
   const p = state.params;
   const sp = m2s(p.h, p.a + p.k);
-  ctx.fillStyle = '#ff6b9d';
+  ctx.fillStyle = '#FFB283';
   ctx.strokeStyle = '#fff';
   ctx.lineWidth = 2.5;
   ctx.beginPath();
@@ -323,11 +323,11 @@ function drawAnchor() {
   const tw = ctx.measureText(label).width;
   let lx = sp.x + 12;
   if (lx + tw > stage.getBoundingClientRect().width - 8) lx = sp.x - tw - 12;
-  ctx.fillStyle = 'rgba(8,12,38,.7)';
+  ctx.fillStyle = 'rgba(255,255,255,.92)';
   ctx.beginPath();
   ctx.roundRect(lx - 4, sp.y - 9, tw + 8, 15, 7);
   ctx.fill();
-  ctx.fillStyle = '#ffb3cd';
+  ctx.fillStyle = '#D9732B';
   ctx.fillText(label, lx, sp.y + 3);
 }
 

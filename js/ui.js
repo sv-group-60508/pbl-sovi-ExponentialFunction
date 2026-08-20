@@ -61,7 +61,7 @@ export function updateCollectPill() {
 
 function paintSlider(sl, color) {
   const pct = ((sl.value - sl.min) / (sl.max - sl.min)) * 100;
-  sl.style.background = `linear-gradient(to right, ${color} 0%, ${color} ${pct}%, #e5e5e5 ${pct}%, #e5e5e5 100%)`;
+  sl.style.background = `linear-gradient(to right, ${color} 0%, ${color} ${pct}%, #EAE4FD ${pct}%, #EAE4FD 100%)`;
 }
 
 export function buildParams() {
@@ -83,6 +83,8 @@ export function buildParams() {
     el.className = 'param';
     el.style.setProperty('--c', meta.color);
     el.style.setProperty('--cd', meta.dark);
+    el.style.setProperty('--ct', meta.ink);
+    el.style.setProperty('--bc', meta.badge);
     el.innerHTML = `
       <div class="p-top">
         <span class="p-badge">${p}</span>

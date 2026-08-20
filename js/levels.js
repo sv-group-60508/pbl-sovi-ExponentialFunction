@@ -41,7 +41,7 @@ export const LEVELS = [
   },
   {
     name: 'Launch Day',
-    tip: "Sovi starts ads on day 2! h sets 'which day', k sets the 'starting base'. Align the pink anchor to the growth track, then dial in curvature b 🎯",
+    tip: "Sovi starts ads on day 2! h sets 'which day', k sets the 'starting base'. Align the coral anchor to the growth track, then dial in curvature b 🎯",
     fail: "Anchor (h, a+k) is the curve's launch point: set h = 2, k = 2 to move it to (2, 4); b = 2 dodges the asteroids",
     win: "y = 2^(t−2) + 2: h picks the launch day, k picks the base — 'asymptote + anchor' positioning unlocked. Graduated!",
     init: { a: 1, b: 2, h: 0, k: 0 },
@@ -65,10 +65,10 @@ export const LEVELS = [
 ];
 
 export const PARAM_META = {
-  b: { name: 'base · growth or decay', color: '#1cb0f6', dark: '#1899d6', min: 0.1, max: 5, step: 0.05, nudge: 0.1 },
-  a: { name: 'coeff · stretch or flip', color: '#ce82ff', dark: '#b86ae0', min: -4, max: 4, step: 0.1, nudge: 0.5 },
-  h: { name: 'shift h (left/right)', color: '#ffc800', dark: '#dea900', min: -6, max: 6, step: 0.25, nudge: 0.5 },
-  k: { name: 'shift k (asymptote)', color: '#58cc02', dark: '#46a302', min: -6, max: 6, step: 0.25, nudge: 0.5 }
+  b: { name: 'base · growth or decay', color: '#31D6E7', dark: '#1FB4C6', ink: '#0E9AAC', badge: '#222531', min: 0.1, max: 5, step: 0.05, nudge: 0.1 },
+  a: { name: 'coeff · stretch or flip', color: '#8D61EF', dark: '#7451D6', ink: '#6F47D8', badge: '#FFFFFF', min: -4, max: 4, step: 0.1, nudge: 0.5 },
+  h: { name: 'shift h (left/right)', color: '#FFE783', dark: '#E6C95A', ink: '#B78A00', badge: '#222531', min: -6, max: 6, step: 0.25, nudge: 0.5 },
+  k: { name: 'shift k (asymptote)', color: '#FFB283', dark: '#E89463', ink: '#D9732B', badge: '#222531', min: -6, max: 6, step: 0.25, nudge: 0.5 }
 };
 
 export const PARAM_ORDER = ['b', 'a', 'h', 'k'];

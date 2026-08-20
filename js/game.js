@@ -24,7 +24,7 @@ function updateFlight(W, H) {
     const p1 = state.tail[i];
     const p2 = state.tail[i + 1];
     p1.a -= 0.04;
-    ctx.strokeStyle = `rgba(125,233,255,${Math.max(0, p1.a)})`;
+    ctx.strokeStyle = `rgba(49,214,231,${Math.max(0, p1.a)})`;
     ctx.lineWidth = (i / state.tail.length) * 6 + 1;
     ctx.lineCap = 'round';
     ctx.beginPath();
@@ -36,9 +36,11 @@ function updateFlight(W, H) {
   const ang = Math.atan2(-df(mx) * state.view.unit, state.view.unit);
   ctx.translate(sp.x, sp.y);
   ctx.rotate(ang);
-  ctx.shadowColor = '#7de9ff';
+  ctx.shadowColor = 'rgba(141,97,239,.5)';
   ctx.shadowBlur = 14;
   ctx.fillStyle = '#fff';
+  ctx.strokeStyle = '#8D61EF';
+  ctx.lineWidth = 2;
   ctx.beginPath();
   ctx.moveTo(15, 0);
   ctx.lineTo(-9, -8);
@@ -46,7 +48,8 @@ function updateFlight(W, H) {
   ctx.lineTo(-9, 8);
   ctx.closePath();
   ctx.fill();
-  ctx.fillStyle = '#ffb020';
+  ctx.stroke();
+  ctx.fillStyle = '#FFB283';
   ctx.beginPath();
   ctx.moveTo(-6, -3.5);
   ctx.lineTo(-15 - Math.random() * 7, 0);
@@ -60,7 +63,7 @@ function updateFlight(W, H) {
       tg.collected = true;
       sound.collect();
       vibrate(20);
-      burst(sp.x, sp.y, '#4dd8ff', 22);
+      burst(sp.x, sp.y, '#31D6E7', 22);
       updateCollectPill();
     }
   });
@@ -74,7 +77,7 @@ function updateFlight(W, H) {
     state.hitObstacle = true;
     sound.hit();
     vibrate(90);
-    burst(sp.x, sp.y, '#ff4b4b', 32);
+    burst(sp.x, sp.y, '#FF6B6B', 32);
     stage.classList.remove('shake');
     void stage.offsetWidth;
     stage.classList.add('shake');
