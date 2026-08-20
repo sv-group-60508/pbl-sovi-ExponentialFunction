@@ -128,10 +128,11 @@ canvas{display:block;width:100%;height:100%;touch-action:none;}
   position:absolute;top:10px;left:10px;max-width:calc(100% - 96px);
   overflow:hidden;text-overflow:ellipsis;
   background:rgba(255,255,255,.88);border:1.5px solid var(--lavender-deep);
-  color:var(--purple);font-family:'Courier New',monospace;font-weight:700;font-size:11.5px;
-  padding:6px 11px;border-radius:999px;white-space:nowrap;pointer-events:none;
+  color:var(--purple);font-weight:700;font-size:13px;
+  padding:5px 12px;border-radius:999px;white-space:nowrap;pointer-events:none;
   backdrop-filter:blur(4px);
 }
+.formula-pill .katex{color:inherit;font-size:1em}
 .collect-pill{
   position:absolute;top:10px;right:10px;
   background:rgba(255,255,255,.88);border:1.5px solid var(--line);

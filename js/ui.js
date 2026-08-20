@@ -47,10 +47,18 @@ export function toggleHint() {
 
 export function updateFormula() {
   const p = state.params;
+  const el = $('formulaPill');
+  if (window.katex) {
+    let tex = `f(x) = ${fmt(p.a)} \\cdot ${fmt(p.b)}`;
+    tex += p.h === 0 ? '^{x}' : p.h > 0 ? `^{(x-${fmt(p.h)})}` : `^{(x+${fmt(-p.h)})}`;
+    if (p.k !== 0) tex += p.k > 0 ? `+${fmt(p.k)}` : `-${fmt(-p.k)}`;
+    katex.render(tex, el, { throwOnError: false });
+    return;
+  }
   let s = `f(x) = ${fmt(p.a)}·${fmt(p.b)}`;
   s += p.h === 0 ? '^x' : p.h > 0 ? `^(x−${fmt(p.h)})` : `^(x+${fmt(-p.h)})`;
   if (p.k !== 0) s += p.k > 0 ? ` + ${fmt(p.k)}` : ` − ${fmt(-p.k)}`;
-  $('formulaPill').textContent = s;
+  el.textContent = s;
 }
 
 export function updateCollectPill() {
