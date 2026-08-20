@@ -12,6 +12,9 @@ import {
 } from './ui.js';
 import { burst, confetti, draw, initStars, setFlightTick } from './render.js';
 
+const APP_VERSION = document.querySelector('meta[name="app-version"]')?.content || 'unknown';
+console.info(`[ExpoFlight] build ${APP_VERSION}`);
+
 function updateFlight(W, H) {
   state.flightX += 0.11;
   const mx = state.flightX;
