@@ -64,6 +64,11 @@ body{
   transition:transform .1s;
 }
 .icon-btn:active{transform:scale(.88);}
+.icon-btn{color:var(--ink);}
+#soundBtn .ic{display:block;}
+#soundBtn .ic-off{display:none;}
+#soundBtn.muted .ic-on{display:none;}
+#soundBtn.muted .ic-off{display:block;}
 
 /* ---------- Sovi Logo coach bubble (Gizmo AI companion + Duolingo character) ---------- */
 .bubble-row{
@@ -155,6 +160,8 @@ canvas{display:block;width:100%;height:100%;touch-action:none;}
   font-family:'Fredoka',sans-serif;font-weight:600;font-size:14px;color:var(--ink-soft);
   flex-shrink:0;
 }
+.deck-title{display:flex;align-items:center;gap:7px;}
+.deck-title svg{flex-shrink:0;display:block;}
 .reset-btn{
   border:none;background:#F1EEFB;color:var(--ink-soft);font-weight:800;font-size:12px;
   padding:6px 12px;border-radius:99px;cursor:pointer;font-family:inherit;

@@ -182,7 +182,7 @@ function bindEvents() {
   });
   $('soundBtn').addEventListener('click', () => {
     const on = sound.toggle();
-    $('soundBtn').textContent = on ? '🔊' : '🔇';
+    $('soundBtn').classList.toggle('muted', !on);
     if (on) sound.click();
   });
   $('askBtn').addEventListener('click', (e) => {
@@ -211,7 +211,13 @@ function bindEvents() {
 
 function boot() {
   setFlightTick(updateFlight);
-  window.addEventListener('pointerdown', () => sound.init(), { once: true });
+  const unlockAudio = () => sound.init();
+  window.addEventListener('pointerdown', unlockAudio);
+  window.addEventListener('touchstart', unlockAudio, { passive: true });
+  window.addEventListener('keydown', unlockAudio);
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) sound.init();
+  });
   $('xpVal').textContent = state.xp;
   bindEvents();
   resizeCanvas();

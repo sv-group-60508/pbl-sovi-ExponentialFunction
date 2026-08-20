@@ -2,13 +2,32 @@ export class SoundEngine {
   constructor() {
     this.ctx = null;
     this.enabled = true;
+    this._warmed = false;
   }
   init() {
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return;
     if (!this.ctx) {
-      const AC = window.AudioContext || window.webkitAudioContext;
-      this.ctx = new AC();
+      try {
+        this.ctx = new AC();
+      } catch (e) {
+        return;
+      }
     }
-    if (this.ctx && this.ctx.state === 'suspended') this.ctx.resume();
+    if (this.ctx.state === 'suspended') {
+      this.ctx.resume().catch(() => {});
+    }
+    if (!this._warmed && this.ctx.state !== 'closed') {
+      try {
+        const src = this.ctx.createBufferSource();
+        src.buffer = this.ctx.createBuffer(1, 1, 22050);
+        src.connect(this.ctx.destination);
+        src.start(0);
+        this._warmed = true;
+      } catch (e) {
+        /* ignore */
+      }
+    }
   }
   toggle() {
     this.enabled = !this.enabled;
@@ -18,7 +37,7 @@ export class SoundEngine {
     if (!this.enabled) return;
     this.init();
     try {
-      const t = this.ctx.currentTime + delay;
+      const t = this.ctx.currentTime + 0.03 + delay;
       const o = this.ctx.createOscillator();
       const g = this.ctx.createGain();
       o.type = type;
@@ -44,7 +63,7 @@ export class SoundEngine {
     if (!this.enabled) return;
     this.init();
     try {
-      const t = this.ctx.currentTime;
+      const t = this.ctx.currentTime + 0.03;
       const o = this.ctx.createOscillator();
       const g = this.ctx.createGain();
       o.type = 'sawtooth';
